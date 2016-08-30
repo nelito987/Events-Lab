@@ -1,0 +1,14 @@
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Events.Data.dll.config
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Events.Data.dll
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Events.Data.pdb
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\EntityFramework.dll
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\EntityFramework.xml
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\obj\Debug\Events.Data.dll
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\obj\Debug\Events.Data.pdb
+c:\users\myself\documents\visual studio 2015\Projects\Events-Lab\Events.Data\obj\Debug\Events.Data.csprojResolveAssemblyReference.cache
