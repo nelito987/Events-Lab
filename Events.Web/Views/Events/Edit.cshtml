@@ -1,11 +1,11 @@
 ﻿@model Events.Web.Models.EventInputModel
 
 @{
-    ViewBag.Title = "Create New Event";
+    ViewBag.Title = "Edit Event";
 }
 
 <h2>@ViewBag.Title</h2>
-<hr/>
+<hr />
 
 @Html.Partial("_EventEditorForm")
 
@@ -18,4 +18,3 @@
 @section styles {
     @Styles.Render("~/Content/bootstrap-datetimepicker")
 }
-

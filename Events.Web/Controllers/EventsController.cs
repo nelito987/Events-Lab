@@ -46,6 +46,7 @@
         }
 
         // GET: Events/My
+        [HttpGet]
         public ActionResult My()
         {
             string currentUserId = this.User.Identity.GetUserId();
@@ -61,6 +62,91 @@
                 UpcomingEvents = upcomingEvents,
                 PassedEvents = passedEvents
             });
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var eventToEdit = this.LoadEvent(id);
+            if(eventToEdit == null)
+            {
+                this.AddNotification("Cannot edit event #" + id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+
+            var model = EventInputModel.CreateFromEvent(eventToEdit);
+            return this.View(model);
+        }
+
+        private Event LoadEvent(int id)
+        {
+            var currentUserId = this.User.Identity.GetUserId();
+            var isAdmin = this.IsAdmin();
+
+            var eventToEdit = this.db.Events
+                .Where(e => e.Id == id)
+                .FirstOrDefault(e => e.AuthorId == currentUserId || isAdmin);
+
+            return eventToEdit;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, EventInputModel model)
+        {
+            var eventToEdit = this.LoadEvent(id);
+            if (eventToEdit == null)
+            {
+                this.AddNotification("Cannot edit event #" + id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+
+            if(model != null && this.ModelState.IsValid)
+            {
+                eventToEdit.Title = model.Title;
+                eventToEdit.StartDateTime = model.StartDateTime;
+                eventToEdit.Duration = model.Duration;
+                eventToEdit.Description = model.Description;
+                eventToEdit.Location = model.Location;
+                eventToEdit.IsPublic = model.IsPublic;
+
+                this.db.SaveChanges();
+                this.AddNotification("Event edited!", NotificationType.INFO);
+                return this.RedirectToAction("My");
+            }
+
+            return this.View(model);
+        }
+
+        [HttpGet]
+
+        public ActionResult Delete(int id)
+        {
+            var eventToDelete = this.LoadEvent(id);
+            if(eventToDelete == null)
+            {
+                this.AddNotification("Cannot delete null event# " + eventToDelete.Id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+
+            var model = EventInputModel.CreateFromEvent(eventToDelete);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, EventInputModel model)
+        {
+            var eventToDelete = this.LoadEvent(id);
+            if (eventToDelete == null)
+            {
+                this.AddNotification("Cannot delete null event# " + eventToDelete.Id, NotificationType.ERROR);
+                return this.RedirectToAction("My");
+            }
+
+            this.db.Events.Remove(eventToDelete);
+            this.db.SaveChanges();
+            this.AddNotification("Event is deleted successfully", NotificationType.INFO);
+            return this.RedirectToAction("My");
         }
     }
 }
