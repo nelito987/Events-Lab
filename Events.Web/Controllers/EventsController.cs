@@ -1,14 +1,16 @@
-﻿using Events.Data;
-using Events.Web.Models;
-using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace Events.Web.Controllers
+﻿namespace Events.Web.Controllers
 {
+    using Events.Data;
+    using Events.Web.Extensions;
+    using Events.Web.Models;
+    using Microsoft.AspNet.Identity;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Mvc;
+
+    [Authorize]
     public class EventsController : BaseController
     {
         // GET: Events/Create
@@ -36,6 +38,7 @@ namespace Events.Web.Controllers
                 this.db.Events.Add(e);
                 this.db.SaveChanges();
                 //Display notification message "Event created."
+                this.AddNotification("Event created.", NotificationType.INFO);
                 return this.RedirectToAction("My");
             }
 
@@ -45,7 +48,19 @@ namespace Events.Web.Controllers
         // GET: Events/My
         public ActionResult My()
         {
-            return View();
+            string currentUserId = this.User.Identity.GetUserId();
+            var events = this.db.Events
+                .Where(e => e.AuthorId == currentUserId)
+                .OrderBy(e => e.StartDateTime)
+                .Select(EventViewModel.ViewModel);
+
+            var upcomingEvents = events.Where(e => e.StartDateTime > DateTime.Now);
+            var passedEvents = events.Where(e => e.StartDateTime <= DateTime.Now);
+            return View(new UpcomingPassedEventsViewModel()
+            {
+                UpcomingEvents = upcomingEvents,
+                PassedEvents = passedEvents
+            });
         }
     }
 }

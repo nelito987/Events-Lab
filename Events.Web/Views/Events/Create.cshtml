@@ -30,6 +30,16 @@
             </div>
         </div>
 
+        <script>
+            $(function () {
+                $('#StartDateTime').datetimepicker({
+                    format: 'DD-MMM-YYYY HH:mm',
+                    sideBySide: true,
+                    showTodayButton: true
+                });
+            });
+        </script>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -37,6 +47,19 @@
                 @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <script>
+            $(function () {
+                var date = new Date();
+                date.setHours(1);
+                date.setMinutes(0);
+                $('#Duration').datetimepicker({
+                    format: 'HH:mm',
+                    defaultDate: date,
+                    showClear: true
+                });
+            });
+        </script>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -72,5 +95,14 @@
         </div>
         
     </div>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap-datetimepicker")
+}
+
+@section styles {
+    @Styles.Render("~/Content/bootstrap-datetimepicker")
 }
 

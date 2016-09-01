@@ -36,3 +36,9 @@ textarea {
     margin: 5px;
     word-wrap: break-word;
 }
+.alert {
+    margin-top: 10px;
+    background-color: hotpink;
+    color: indigo;
+    border: 2px solid blueviolet;
+}
